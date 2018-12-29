@@ -3,35 +3,25 @@ package dao
 import (
 	"log"
 
-	mgo "gopkg.in/mgo.v2"
-
 	. "github.com/rootemanuel/goapi-blank/entity"
 )
 
-type RootDAO struct {
-	Server   string
-	Database string
-}
-
-var db *mgo.Database
+type RootDao struct{}
 
 const (
-	COLLECTION = "root"
+	DB_ROOT   = "root"
+	COLL_ROOT = "root"
 )
 
-func (m *RootDAO) Connect() {
-	session, err := mgo.Dial(m.Server)
-	if err != nil {
-		log.Fatal(err)
-	}
-	db = session.DB(m.Database)
-}
-
-func (m *RootDAO) FindAll() ([]RootEntity, error) {
+func (m *RootDao) FindAll() ([]RootEntity, error) {
 	var roots []RootEntity
-	err := db.C(COLLECTION).Find(nil).All(&roots)
+	session := GetSession()
+	defer session.Close()
+
+	err := session.DB(DB_ROOT).C(COLL_ROOT).Find(nil).All(&roots)
 	if err != nil {
 		log.Println(err)
 	}
+
 	return roots, err
 }

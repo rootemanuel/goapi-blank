@@ -13,7 +13,7 @@ type RootEntity struct {
 	Cenario       string        `bson:"cenario" json:"cenario"`
 	Data          string        `bson:"data" json:"data"`
 	Ec            string        `bson:"ec" json:"ec"`
-	TipoTransacao string        `bson:"tipoTransacao"S json:"tipoTransacao"`
+	TipoTransacao string        `bson:"tipoTransacao" json:"tipoTransacao"`
 	Qtde          int           `bson:"qtde" json:"qtde"`
 	Umi           string        `bson:"umi" json:"umi"`
 	QtdeResgate   int           `bson:"qtdeResgate" json:"qtdeResgate"`
